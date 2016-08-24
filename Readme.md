@@ -1,10 +1,10 @@
 [![npm](https://img.shields.io/npm/v/hazelcast-store.svg)](https://npmjs.com/package/hazelcast-store) [![Dependencies](https://img.shields.io/david/jackspaniel/hazelcast-store.svg)](https://david-dm.org/jackspaniel/hazelcast-store) ![Downloads](https://img.shields.io/npm/dm/hazelcast-store.svg)
 
-**hazelcast-store** is a Hazelcast session store backed by [hazelcast-client](https://github.com/hazelcast/hazelcast-nodejs-client).
+### **hazelcast-store** is a Hazelcast session store backed by [hazelcast-client](https://github.com/hazelcast/hazelcast-nodejs-client).
 
 **NOTE: This is a first pass, use at your own risk. I will be glad to accept pull requests to fix bugs or add new features.**
 
-## Setup
+# Setup
 ```sh
 npm install hazelcast-store express-session
 ```
@@ -32,7 +32,7 @@ HazelcastClient.newHazelcastClient(clientConfig).then((hzInstance) => {
 ```
 
 
-## Options
+# Options
 A full initialized Hazelcast Client is required. This client is either passed directly using the `client` param or can be added after creating the HazelcastStore using the store.addClient() method. This method is probably the easiest because the code that creates an instance of the Hazelcast client is asynchronous.
 
 The following additional params are optional:
@@ -46,11 +46,11 @@ The following additional params are optional:
 	-	If a function, it is called anytime an error occurs (useful for custom logging)
 	-	If `false`, no logging occurs.    
 
-## TODO
+# TODO
 1. Custom serialization
 2. Possily implement touch() method. Is express-sessions even using it any more? [Doesn't seem like it](https://github.com/expressjs/session/blob/839959036c0f6add53166f4a4d73edfc126d5ab7/session/session.js)
 3. Implement clear(), all() and length()
 4. Handle hazelcast down/unreachable? (Most likely node will just throw an error)
 
-## License
+# License
 MIT
