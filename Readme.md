@@ -1,6 +1,6 @@
 [![npm](https://img.shields.io/npm/v/hazelcast-store.svg)](https://npmjs.com/package/hazelcast-store) [![Dependencies](https://img.shields.io/david/jackspaniel/hazelcast-store.svg)](https://david-dm.org/jackspaniel/hazelcast-store) ![Downloads](https://img.shields.io/npm/dm/hazelcast-store.svg)
 
-### **hazelcast-store** is a Hazelcast implementation of [express session store](https://github.com/expressjs/session#compatible-session-stores) backed by the [hazelcast-nodejs-client](https://github.com/hazelcast/hazelcast-nodejs-client).
+**hazelcast-store** is a Hazelcast implementation of [express session store](https://github.com/expressjs/session#compatible-session-stores) backed by the [hazelcast-nodejs-client](https://github.com/hazelcast/hazelcast-nodejs-client).
 
 **NOTE: This is a first pass, use at your own risk. I will be glad to accept pull requests to fix bugs or add new features.**
 
