@@ -33,7 +33,7 @@ HazelcastClient.newHazelcastClient(clientConfig).then((hzInstance) => {
 
 
 # Options
-A full initialized Hazelcast Client is required. This client is either passed directly using the `client` property, or it can be added after creating the HazelcastStore using the store.addClient() method (see example above). This method is probably the easiest because the code that creates an instance of the Hazelcast client is asynchronous, and express sessions needs to set early in the app.use() chain.
+A full initialized Hazelcast Client is required. This client is either passed directly using the `client` property, or it can be added after creating the HazelcastStore using the store.setClient() method (see example above). This method is probably the easiest because the code that creates an instance of the Hazelcast client is asynchronous, and express sessions needs to set early in the app.use() chain.
 
 The following additional properties are optional:
 
