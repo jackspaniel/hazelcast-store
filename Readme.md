@@ -18,7 +18,7 @@ const hzStore = new HazelcastStore({ ttl: 15*60*1000, debugPrefix: 'oc' });
 app.use(session({ store: hzStore, secret: 'argle bargle' }));
 ```
 
-### Example implementation of Hazelcast Client and setting the client on the HazelcastStore:
+### Example implementation of `HazelcastClient` and setting the client instance on the `HazelcastStore`:
 ```js
 const HazelcastClient = require('hazelcast-client').Client;
 const HazelcastConfig = require('hazelcast-client').Config;
