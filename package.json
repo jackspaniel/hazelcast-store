@@ -11,6 +11,10 @@
     "store",
     "express"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jackspaniel/hazelcast-store"
+  },
   "dependencies": {
     "debug": "^2.2.0"
   },

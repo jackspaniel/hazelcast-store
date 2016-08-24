@@ -13,14 +13,11 @@ npm install hazelcast-store express-session
 Pass the `express-session` store into `hazelcast-store` to create a `HazelcastStore` constructor, which then creates a new Store instance to pass to express sessions. Note: since the Hazelcast Client generation is asynchronous it's a little tricky to add early in the app.use() chain. See below for a method to add the HazelcastClient to the HazelcastStore after creation.
 
 ```js
-var session = require('express-session');
-var HazecastStore = require('hazelcast-store')(session);
+const session = require('express-session');
+const HazelcastStore = require('hazelcast-store')(session);
 
 const hzStore = new HazelcastStore({ ttl: 15*60*1000, debugPrefix: 'oc' });
-app.use(session({
-  store: hzStore,
-  secret: 'argle bargle'
-}));
+app.use(session({ store: hzStore, secret: 'argle bargle' }));
 ```
 
 Example implementation of Hazelcast Client and setting it on the HazelcastStore
@@ -29,16 +26,11 @@ Example implementation of Hazelcast Client and setting it on the HazelcastStore
 const HazelcastClient = require('hazelcast-client').Client;
 const HazelcastConfig = require('hazelcast-client').Config;
 
-var clientConfig = new HazelcastConfig.ClientConfig();
+const clientConfig = new HazelcastConfig.ClientConfig();
 clientConfig.networkConfig.addresses = [{host: '127.0.0.1', 5701}];
 
-HazelcastClient
-  .newHazelcastClient(clientConfig)       
-  .then(function (hzInstance) {  
-    debug("HazelCast Client successfully created!");
-    if (hazelcastStore && config.hazelcast.sessions) 
-    hazelcastStore.setClient(hzInstance);
-    app.hzClient = hzInstance;
+HazelcastClient.newHazelcastClient(clientConfig).then((hzInstance) => {  
+  hazelcastStore.setClient(hzInstance);
 });
 ```
 
