@@ -18,7 +18,7 @@ const hzStore = new HazelcastStore({ ttl: 15*60*1000, debugPrefix: 'oc' });
 app.use(session({ store: hzStore, secret: 'argle bargle' }));
 ```
 
-### Example implementation of Hazelcast Client and setting the client asyncronously on the HazelcastStore:
+### Example implementation of Hazelcast Client and setting the client on the HazelcastStore:
 ```js
 const HazelcastClient = require('hazelcast-client').Client;
 const HazelcastConfig = require('hazelcast-client').Config;
@@ -33,9 +33,9 @@ HazelcastClient.newHazelcastClient(clientConfig).then((hzInstance) => {
 
 
 # Options
-A full initialized Hazelcast Client is required. This client is either passed directly using the `client` param or can be added after creating the HazelcastStore using the store.addClient() method. This method is probably the easiest because the code that creates an instance of the Hazelcast client is asynchronous.
+A full initialized Hazelcast Client is required. This client is either passed directly using the `client` property, or it can be added after creating the HazelcastStore using the store.addClient() method (see example above). This method is probably the easiest because the code that creates an instance of the Hazelcast client is asynchronous, and express sessions needs to set early in the app.use() chain.
 
-The following additional params are optional:
+The following additional properties are optional:
 
 -  `ttl` Hazelcast session TTL (expiration) in milli-seconds
 -  `debugPrefix` prefix to use with debug module so this module's output can be seen with your app's debug output
