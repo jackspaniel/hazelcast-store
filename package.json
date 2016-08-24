@@ -1,0 +1,28 @@
+{
+  "name": "hazelcast-store",
+  "version": "0.0.1",
+  "description": "Hazelcast implementation of expressjs session store",
+  "main": "index.js",
+  "author": "jackspaniel",
+  "license": "MIT",
+  "keywords": [
+    "hazelcast",
+    "session",
+    "store",
+    "express"
+  ],
+  "dependencies": {
+    "debug": "^2.2.0"
+  },
+  "devDependencies": {
+    "express-session": "^1.9.1",
+    "hazelcast-client": "^0.4.0",
+    "mocha": "^3.0.2"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "scripts": {
+    "test": "mocha -R spec -t 10000 test/test-*.js"
+  }
+}
