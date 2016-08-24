@@ -5,13 +5,11 @@
 **NOTE: This is a first pass, use at your own risk. I will be glad to accept pull requests to fix bugs or add new features.**
 
 ## Setup
-
 ```sh
 npm install hazelcast-store express-session
 ```
 
-Pass the `express-session` store into `hazelcast-store` to create a `HazelcastStore` constructor, which then creates a new Store instance to pass to express sessions. Note: since the Hazelcast Client generation is asynchronous it's a little tricky to add early in the app.use() chain. See below for a method to add the HazelcastClient to the HazelcastStore after creation.
-
+### Create an instance of `HazelcastStore` and pass it to the express sessions API:
 ```js
 const session = require('express-session');
 const HazelcastStore = require('hazelcast-store')(session);
@@ -20,8 +18,7 @@ const hzStore = new HazelcastStore({ ttl: 15*60*1000, debugPrefix: 'oc' });
 app.use(session({ store: hzStore, secret: 'argle bargle' }));
 ```
 
-Example implementation of Hazelcast Client and setting it on the HazelcastStore
-
+### Example implementation of Hazelcast Client and setting the client asyncronously on the HazelcastStore:
 ```js
 const HazelcastClient = require('hazelcast-client').Client;
 const HazelcastConfig = require('hazelcast-client').Config;
@@ -36,7 +33,6 @@ HazelcastClient.newHazelcastClient(clientConfig).then((hzInstance) => {
 
 
 ## Options
-
 A full initialized Hazelcast Client is required. This client is either passed directly using the `client` param or can be added after creating the HazelcastStore using the store.addClient() method. This method is probably the easiest because the code that creates an instance of the Hazelcast client is asynchronous.
 
 The following additional params are optional:
@@ -56,7 +52,5 @@ The following additional params are optional:
 3. Implement clear(), all() and length()
 4. Handle hazelcast down/unreachable? (Most likely node will just throw an error)
 
-
 ## License
-
 MIT
