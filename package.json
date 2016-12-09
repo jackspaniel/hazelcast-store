@@ -16,11 +16,12 @@
     "url": "https://github.com/jackspaniel/hazelcast-store"
   },
   "dependencies": {
-    "debug": "^2.2.0"
+    "debug": "^2.2.0",
+    "hazelcast-client": "^0.4.1"
   },
   "devDependencies": {
     "express-session": "^1.9.1",
-    "hazelcast-client": "^0.4.0",
+    "hazelcast-client": "^0.4.1",
     "mocha": "^3.0.2"
   },
   "engines": {
