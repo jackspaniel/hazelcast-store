@@ -16,7 +16,7 @@ describe("hazelcast-store", function () {
       "path": "/",
       "httpOnly": true,
       "secure": true,
-      "maxAge": 600000
+      "maxAge": 1000
     },
     "name": "sid"
   };
@@ -124,4 +124,38 @@ describe("hazelcast-store", function () {
     });
   
   });
+
+    describe("test a short TTL with cookie ", function () {
+
+        it("should still exist with 100 ms timeout and a maxage of 1 second", (done) => {
+            createStore({ttl: null }, () => {
+            assert(typeof store.client === "object");
+            assert.strictEqual(store.ttl, null);
+
+            store.set(id, testSession, (err) => {
+                assert.strictEqual(err, null);
+
+            setTimeout(() => {
+            store.get(id, (error, session) => {
+                assert.strictEqual(error, null);
+            assert.deepEqual(session, testSession); // shoudl still exist
+            done();
+        });
+        }, 100);
+        });
+        });
+    });
+
+
+        it("should not exist after a 2 second timeout and a maxage of 1 second", (done) => {
+            setTimeout(() => {
+            store.get(id, (error, session) => {
+                assert.strictEqual(error, null);
+            assert.strictEqual(session, null); // session should be gone after
+            done();
+        });
+        }, 2000);
+    });
+
+    });
 });
