@@ -24,7 +24,7 @@ const HazelcastClient = require('hazelcast-client').Client;
 const HazelcastConfig = require('hazelcast-client').Config;
 
 const clientConfig = new HazelcastConfig.ClientConfig();
-clientConfig.networkConfig.addresses = [{host: '127.0.0.1', 5701}];
+clientConfig.networkConfig.addresses = [{host: '127.0.0.1', port: 5701}];
 
 HazelcastClient.newHazelcastClient(clientConfig).then((hzInstance) => {  
   hazelcastStore.setClient(hzInstance);
