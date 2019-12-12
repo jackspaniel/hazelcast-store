@@ -4,11 +4,11 @@ const HazelcastStore = require('../lib/hazelcast-store')(session);
 const HazelcastClient = require('hazelcast-client').Client;
 const HazelcastConfig = require('hazelcast-client').Config;
 const clientConfig = new HazelcastConfig.ClientConfig();
-clientConfig.networkConfig.addresses = [{host: '127.0.0.1', port: 5701}];
+clientConfig.networkConfig.addresses.push('127.0.0.1:5701');
 
 describe("hazelcast-store", function () {
   const assert = require("assert");
-  
+
   const id = new Date().getTime();
 
   const testSession = {
@@ -20,31 +20,31 @@ describe("hazelcast-store", function () {
     },
     "name": "sid"
   };
-  
-  const options = { 
-    ttl: 15*60*1000, 
-    debugPrefix: 'oc' 
+
+  const options = {
+    ttl: 15*60*1000,
+    debugPrefix: 'oc'
   };
 
   function createStore(options, done) {
     store = new HazelcastStore(options);
       assert(typeof store === "object");
-      
+
       HazelcastClient
-      .newHazelcastClient(clientConfig)     
-      .then(function (hzInstance) {  
+      .newHazelcastClient(clientConfig)
+      .then(function (hzInstance) {
         assert(typeof hzInstance === "object");
         store.setClient(hzInstance);
         console.log('store created!');
         done();
-      });   
-  } 
-  
+      });
+  }
+
   let store;
   before("should prepare default empty store with new client", (done) => {
     createStore(options, done);
   });
-  
+
   it("should test the default store", (done) => {
     assert(typeof store.client === "object");
     assert.strictEqual(store.ttl, options.ttl);
@@ -83,7 +83,7 @@ describe("hazelcast-store", function () {
 
       store.destroy(id, function (erro) {
         assert.strictEqual(erro, null);
-        
+
         store.get(id, function (error, session) {
           assert.strictEqual(error, null);
           assert.strictEqual(session, null);
@@ -103,26 +103,26 @@ describe("hazelcast-store", function () {
 
         store.set(id, testSession, (err) => {
           assert.strictEqual(err, null);
-          
+
           store.get(id, (error, session) => {
             assert.strictEqual(error, null);
             assert.deepEqual(session, testSession); // shoudl still exist
-            done();          
+            done();
           });
         });
       });
     });
-    
+
     it("should not exist after a 2 second timeout and a ttl of 1 second", (done) => {
       setTimeout(() => {
         store.get(id, (error, session) => {
           assert.strictEqual(error, null);
-          assert.strictEqual(session, null); // session should be gone after 
+          assert.strictEqual(session, null); // session should be gone after
           done();
         });
       }, 2000);
     });
-  
+
   });
 
     describe("test a short TTL with cookie ", function () {
