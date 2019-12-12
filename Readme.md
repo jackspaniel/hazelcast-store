@@ -4,6 +4,9 @@
 
 **NOTE: This is a first pass, use at your own risk. I will be glad to accept pull requests to fix bugs or add new features.**
 
+# Versions
+- 1.0.0 - added support for latest hazelcast client (3.12.1)
+
 # Setup
 ```sh
 npm install hazelcast-store express-session
@@ -30,9 +33,6 @@ HazelcastClient.newHazelcastClient(clientConfig).then((hzInstance) => {
   hazelcastStore.setClient(hzInstance);
 });
 ```
-
-# Versions
-- 1.0.0 - added support for latest hazelcast client (3.12.1)
 
 # Options
 A full initialized Hazelcast Client is required. This client is either passed directly using the `client` property, or it can be added after creating the HazelcastStore using the store.setClient() method (see example above). This method is probably the easiest because the code that creates an instance of the Hazelcast client is asynchronous, and express sessions needs to set early in the app.use() chain.
