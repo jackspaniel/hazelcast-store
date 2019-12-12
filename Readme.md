@@ -26,11 +26,13 @@ const HazelcastConfig = require('hazelcast-client').Config;
 const clientConfig = new HazelcastConfig.ClientConfig();
 clientConfig.networkConfig.addresses = [{host: '127.0.0.1', port: 5701}];
 
-HazelcastClient.newHazelcastClient(clientConfig).then((hzInstance) => {  
+HazelcastClient.newHazelcastClient(clientConfig).then((hzInstance) => {
   hazelcastStore.setClient(hzInstance);
 });
 ```
 
+# Versions
+- 1.0.0 - added support for latest hazelcast client (3.12.1)
 
 # Options
 A full initialized Hazelcast Client is required. This client is either passed directly using the `client` property, or it can be added after creating the HazelcastStore using the store.setClient() method (see example above). This method is probably the easiest because the code that creates an instance of the Hazelcast client is asynchronous, and express sessions needs to set early in the app.use() chain.
@@ -44,7 +46,7 @@ The following additional properties are optional:
 -  `logErrors` Whether or not to log client errors. (default: `false`\)
 	-	If `true`, a default logging function (`console.error`) is provided.
 	-	If a function, it is called anytime an error occurs (useful for custom logging)
-	-	If `false`, no logging occurs.    
+	-	If `false`, no logging occurs.
 
 # TODO
 1. Custom serialization
