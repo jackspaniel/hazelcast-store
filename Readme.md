@@ -25,7 +25,9 @@ app.use(session({ store: hzStore, secret: 'argle bargle' }));
 ```js
 const HazelcastClient = require('hazelcast-client').Client;
 const clientConfig = {
-
+	network: {
+		clusterMembers: ['127.0.0.1:5701']
+	}
 };
 
 HazelcastClient.newHazelcastClient({clientConfig}).then((hzInstance) => {
