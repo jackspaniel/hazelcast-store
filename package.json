@@ -1,6 +1,6 @@
 {
   "name": "hazelcast-store",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Hazelcast implementation of expressjs session store",
   "main": "index.js",
   "author": "jackspaniel",
