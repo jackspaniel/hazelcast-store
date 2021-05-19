@@ -24,12 +24,13 @@ app.use(session({ store: hzStore, secret: 'argle bargle' }));
 ### Example implementation of `HazelcastClient` and setting the client instance on the `HazelcastStore`:
 ```js
 const HazelcastClient = require('hazelcast-client').Client;
-const HazelcastConfig = require('hazelcast-client').Config;
+const clientConfig = {
+	network: {
+		clusterMembers: ['127.0.0.1:5701']
+	}
+};
 
-const clientConfig = new HazelcastConfig.ClientConfig();
-clientConfig.networkConfig.addresses = [{host: '127.0.0.1', port: 5701}];
-
-HazelcastClient.newHazelcastClient(clientConfig).then((hzInstance) => {
+HazelcastClient.newHazelcastClient({clientConfig}).then((hzInstance) => {
   hazelcastStore.setClient(hzInstance);
 });
 ```

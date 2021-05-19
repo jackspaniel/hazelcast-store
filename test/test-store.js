@@ -2,9 +2,6 @@
 const session = require("express-session");
 const HazelcastStore = require('../lib/hazelcast-store')(session);
 const HazelcastClient = require('hazelcast-client').Client;
-const HazelcastConfig = require('hazelcast-client').Config;
-const clientConfig = new HazelcastConfig.ClientConfig();
-clientConfig.networkConfig.addresses.push('127.0.0.1:5701');
 
 describe("hazelcast-store", function () {
   const assert = require("assert");
@@ -31,7 +28,11 @@ describe("hazelcast-store", function () {
       assert(typeof store === "object");
 
       HazelcastClient
-      .newHazelcastClient(clientConfig)
+      .newHazelcastClient({
+        network: {
+          clusterMembers: ['127.0.0.1:5701']
+        }
+      })
       .then(function (hzInstance) {
         assert(typeof hzInstance === "object");
         store.setClient(hzInstance);
