@@ -19,14 +19,14 @@
     "debug": "^2.2.0"
   },
   "devDependencies": {
-    "express-session": "^1.17.0",
+    "express-session": "^1.17.2",
     "hazelcast-client": "^4.1.0",
-    "mocha": "^3.0.2"
+    "mocha": "^8.4.0"
   },
   "engines": {
     "node": "*"
   },
   "scripts": {
-    "test": "mocha -R spec -t 10000 test/test-*.js"
+    "test": "mocha -R spec -t 10000 test/test-*.js --exit"
   }
 }
