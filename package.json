@@ -21,7 +21,7 @@
   "devDependencies": {
     "express-session": "^1.17.2",
     "hazelcast-client": "^4.1.0",
-    "mocha": "^8.4.0"
+    "mocha": "^10.4.0"
   },
   "engines": {
     "node": "*"
